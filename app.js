@@ -88,3 +88,11 @@
   form.addEventListener('submit',function(e){e.preventDefault();send()});
   retryBtn.addEventListener('click',send);
 })();
+
+(function(){
+  var lb=document.getElementById('lb'); if(!lb) return; var li=lb.querySelector('img'), x=lb.querySelector('.lb-x'), last=null;
+  function close(){lb.hidden=true;li.removeAttribute('src');document.body.style.overflow='';if(last)last.focus()}
+  document.querySelectorAll('.shot').forEach(function(s){s.addEventListener('click',function(){last=s;li.src=s.dataset.full;li.alt=s.querySelector('img').alt;lb.hidden=false;document.body.style.overflow='hidden';x.focus()})});
+  lb.addEventListener('click',function(e){if(e.target!==li)close()});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close()});
+})();
